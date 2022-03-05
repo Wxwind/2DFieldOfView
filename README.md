@@ -14,7 +14,6 @@ Shader:
 ## Now Problem:  
 1.the gray just use alpha blend , so red just become dark red  
 I've tried to implement real gray--write render feature and reder pass to grab screen image to post-processing
-in urp. but when render the grey area , **all pixel's stencil value become 0** somehow.(the "render pass event" is
-"after rendering transparents"
+in urp. but when render the grey area , **all pixel's stencil value become 0** somehow.  
+(the "render pass event" is"after rendering transparents")  
 You can test this in scene "Postprocessing"(by change the material "StencilGrayPP" MaskId)
-)
