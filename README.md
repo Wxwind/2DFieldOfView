@@ -11,6 +11,10 @@ Shader:
 3.render the gray where stencil value = 1  
 4.render the target (like other players) where stencil value = 0  
 
-## To improve:  
+## Now Problem:  
 1.the gray just use alpha blend , so red just become dark red  
-if want real gray,you can use post processing in urp  (need to write render feature and reder pass).
+I've tried to implement real gray--write render feature and reder pass to grab screen image to post-processing
+in urp. but when render the grey area , **all pixel's stencil value become 0** somehow.(the "render pass event" is
+"after rendering transparents"
+You can test this in scene "Postprocessing"(by change the material "StencilGrayPP" MaskId)
+)

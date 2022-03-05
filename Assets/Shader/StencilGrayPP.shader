@@ -1,4 +1,4 @@
-Shader "Custom/Stencil/Gray"{
+Shader "Custom/Stencil/GrayPP"{
     
     Properties{
         _ID("Mask ID",int) = 1
@@ -10,14 +10,14 @@ Shader "Custom/Stencil/Gray"{
          Tags { 
             "RenderPipeline" = "UniversalPipeline"
             "LightMode" = "UniversalForward" 
-            "RenderType"="Transparent" 
-            "Queue"="Transparent" 
+            //"RenderType"="Transparent" 
+            //"Queue"="Transparent" 
             "IgnoreProjector"="True"
         } 
        
         Pass{
         
-            Blend SrcAlpha OneMinusSrcAlpha
+            //Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off 
             Stencil{
                  Ref[_ID]
@@ -54,7 +54,7 @@ Shader "Custom/Stencil/Gray"{
            
             half4 frag(v2f i) : SV_Target {             
                 half3 mainColor=SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,i.uv);
-                half grey = dot(_BaseColor,half3(0.22, 0.707, 0.071));
+                half grey = dot(mainColor,half3(0.22, 0.707, 0.071));
                 return half4(grey,grey,grey,_BaseColor.a);
             }           
             ENDHLSL
