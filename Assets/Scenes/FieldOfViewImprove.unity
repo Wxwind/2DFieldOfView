@@ -523,7 +523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &289349754
 Transform:
   m_ObjectHideFlags: 0
@@ -1544,8 +1544,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239923829}
   m_LocalRotation: {x: -0, y: -0, z: -0.3876127, w: 0.92182237}
-  m_LocalPosition: {x: 0.47, y: -3.64, z: -4.767664}
-  m_LocalScale: {x: 0.3994, y: 0.7241893, z: 1}
+  m_LocalPosition: {x: 0.4, y: -2.85, z: -4.767664}
+  m_LocalScale: {x: 1, y: 0.7318, z: 1}
   m_Children: []
   m_Father: {fileID: 1039538641}
   m_RootOrder: 1
@@ -1921,7 +1921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1690384779
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2112,7 +2112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1908889098
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2172,7 +2172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908889097}
   m_LocalRotation: {x: -0, y: -0, z: -0.08774507, w: 0.996143}
-  m_LocalPosition: {x: 1.45, y: 2.65, z: -4.767664}
+  m_LocalPosition: {x: 1.5, y: 2.65, z: -4.767664}
   m_LocalScale: {x: 0.2913, y: 0.5738, z: 1}
   m_Children: []
   m_Father: {fileID: 1039538641}
@@ -2444,7 +2444,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098310870}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2460,18 +2460,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2098310870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881a1ffb2632ec74eb0ddc692d290b5c, type: 3}
+  m_Script: {fileID: 11500000, guid: f4a7abbf528355245a991cc1303d92fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 360
-  viewRadius: 5
+  viewAngle: 40
+  viewRadius: 8
+  forward: {x: 0, y: 0}
   mainCam: {fileID: 519420031}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
   rayCountRatio: 0.25
-  edgeResolveIterations: 5
-  edgeDstThreshold: 0.5
   viewMeshFilter: {fileID: 2098310871}
 --- !u!114 &2098310875
 MonoBehaviour:
