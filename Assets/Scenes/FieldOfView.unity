@@ -314,8 +314,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -764734125
-  m_SortingLayer: 4
+  m_SortingLayerID: 662027775
+  m_SortingLayer: 5
   m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2067,8 +2067,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -764734125
-  m_SortingLayer: 4
+  m_SortingLayerID: 1177531349
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2463,12 +2463,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881a1ffb2632ec74eb0ddc692d290b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 360
+  viewAngle: 58
   viewRadius: 5
   mainCam: {fileID: 519420031}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
+  show_Material: {fileID: 2100000, guid: 547137b2364dd41418457a1dad5d5218, type: 2}
+  hide_Material: {fileID: 2100000, guid: a174bfbc06f852247915e57efe4a5ce9, type: 2}
   rayCountRatio: 0.25
   edgeResolveIterations: 5
   edgeDstThreshold: 0.5

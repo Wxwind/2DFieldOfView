@@ -10,19 +10,24 @@ public class FieldOfView : MonoBehaviour
     public float viewRadius;
 
     public Camera mainCam;
+    
     public LayerMask obstacleMask;
+    public Material show_Material;
+    public Material hide_Material;
     //public LayerMask targetMask;
 
     //Haven't used
     // [HideInInspector] public List<Transform> visiableTargets = new List<Transform>();
 
     public float rayCountRatio;
-    //To find the right edge when two raycasts hit the different obstacles 
     public int edgeResolveIterations;
     public float edgeDstThreshold;
 
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
+    
+    //正常光线碰撞到的障碍物。用于shader变化显示
+    List<Collider2D> showObstacles = new List<Collider2D>();
 
     private void Start()
     {
@@ -71,6 +76,13 @@ public class FieldOfView : MonoBehaviour
 
     private void DrawFieldOfView()
     {
+        //隐藏障碍物(变灰色)
+        foreach (var o in showObstacles)
+        {
+            o.GetComponent<SpriteRenderer>().material = hide_Material;
+        }
+
+        showObstacles.Clear();
         int stepCount = Mathf.RoundToInt(viewAngle * rayCountRatio);
         float stepAngSize = viewAngle / stepCount;
         List<Vector2> viewPoints = new List<Vector2>();
@@ -105,6 +117,12 @@ public class FieldOfView : MonoBehaviour
             oldViewCast = newViewCat;
         }
 
+        //显示碰撞体(正常颜色)
+        foreach (var o in showObstacles)
+        {
+            o.GetComponent<SpriteRenderer>().material = show_Material;
+        }
+        
         int verticeCount = viewPoints.Count + 1;
         Vector3[] vertices = new Vector3[verticeCount];
         int[] triangleIndex = new int[(verticeCount - 2) * 3];
@@ -152,6 +170,11 @@ public class FieldOfView : MonoBehaviour
         var hit = Physics2D.Raycast(playerPosition, dir, viewRadius, obstacleMask);
         if (hit.collider != null)
         {
+            if (hit.collider != null)
+            {
+                if (!showObstacles.Contains(hit.collider)) showObstacles.Add(hit.collider);
+                return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
+            }
             return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
         }
         else return new ViewCastInfo(false, playerPosition + dir * viewRadius, viewRadius, globalAngle);

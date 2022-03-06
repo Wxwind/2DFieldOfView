@@ -12,8 +12,7 @@ Shader:
 4.render the target (like other players) where stencil value = 0  
 
 ## Now Problem:  
-1.the gray just use alpha blend , so red just become dark red  
-I've tried to implement real gray--write render feature and reder pass to grab screen image to post-processing
-in urp. but when render the grey area , **all pixel's stencil value become 0** somehow.  
-(the "render pass event" is"after rendering transparents")  
-You can test this in scene "Postprocessing"(by change the material "StencilGrayPP" MaskId)
+FieldOfView场景里参考的是youtube上的教程 [Field of view visualisation (E01)](https://www.youtube.com/watch?v=rQG9aUWarwE)    
+FieldOfViewImprove场景参考教程优化[【开源】俯视角视野范围显示与优化](https://www.bilibili.com/video/BV1hS4y1S7Y3)  
+ 
+与Collider.ClosedPoint相比，由于Collider2D.ClosedPoint返回的点不一定在碰撞体的包围盒上，因此只能进行不精确的手动矫正，具体参考代码  

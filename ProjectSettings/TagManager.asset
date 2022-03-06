@@ -41,15 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: StencilBase
     uniqueID: 1177531349
     locked: 0
-  - name: Building
+  - name: Ground
     uniqueID: 1685886965
     locked: 0
-  - name: Alive
+  - name: Building
     uniqueID: 2452912347
     locked: 0
-  - name: PostProcessing
+  - name: Alive
     uniqueID: 3530233171
+    locked: 0
+  - name: PostProcessing
+    uniqueID: 662027775
     locked: 0
