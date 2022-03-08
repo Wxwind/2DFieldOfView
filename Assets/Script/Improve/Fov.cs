@@ -95,7 +95,8 @@ public class Fov : MonoBehaviour
         obstacles.AddRange(Physics2D.OverlapCircleAll(pos, viewRadius, obstacleMask));
         foreach (var other in obstacles)
         {
-            float dis = Mathf.Max(other.bounds.size.x, other.bounds.size.y) + 1000;
+            //dis只要远大于碰撞体的尺寸就行
+            float dis =  1000;
             var center = (Vector2) other.transform.position;
             Vector2 dir = Vector3.Cross((Vector3) center - transform.position, Vector3.back);
 
@@ -103,32 +104,30 @@ public class Fov : MonoBehaviour
             upPoint = CheckPoint(upPoint, Vector3.back, other, dis);
             //upPoint不一定在碰撞体边缘上所以只能进行不怎么精确的修正
             upPoint += (center - upPoint).normalized * 0.012f;
-            float angle = Vector2.Angle(upPoint - (Vector2) transform.position, new Vector2(0, 1));
-            if (Vector3.Dot(Vector2.right, upPoint - (Vector2) transform.position) < 0)
+            float angle = Vector2.Angle(upPoint - pos, new Vector2(0, 1));
+            if (Vector3.Dot(Vector2.right, upPoint - pos) < 0)
             {
                 angle = 360 - angle;
             }
+
+            var upPointHit = new ViewCastInfo{angle=angle,dst = (upPoint-pos).magnitude,point = upPoint};
             
             //这里的angle后面也是对角度进行修正
             ViewCastInfo hit = ViewCast(angle - 0.12f, pos);
-            ViewCastInfo hit2 = ViewCast(angle + 0.12f, pos);
-            viewCastInfos.Add(hit);
-            viewCastInfos.Add(hit2);
-
+            AddHitInfo(upPointHit, hit);
 
             var downPoint = other.ClosestPoint(center - dir * dis);
             downPoint = CheckPoint(downPoint, Vector3.forward, other, dis);
             downPoint += (center - downPoint).normalized * 0.012f;
-            float angle2 = Vector2.Angle(downPoint - (Vector2) transform.position, new Vector2(0, 1));
-            if (Vector3.Dot(Vector2.right, downPoint - (Vector2) transform.position) < 0)
+            float angle2 = Vector2.Angle(downPoint - pos, new Vector2(0, 1));
+            if (Vector3.Dot(Vector2.right, downPoint - pos) < 0)
             {
                 angle2 = 360 - angle2;
             }
             
-            ViewCastInfo hit3 = ViewCast(angle2 - 0.12f, pos);
+            var downPointHit = new ViewCastInfo{angle=angle2,dst = (downPoint-pos).magnitude,point = downPoint};
             ViewCastInfo hit4 = ViewCast(angle2 + 0.12f, pos);
-            viewCastInfos.Add(hit3);
-            viewCastInfos.Add(hit4);
+            AddHitInfo(downPointHit, hit4);
         }
 
         viewCastInfos.Sort((a, b) =>
@@ -217,36 +216,34 @@ public class Fov : MonoBehaviour
         if (hit.collider != null)
         {
             if (!showObstacles.Contains(hit.collider)) showObstacles.Add(hit.collider);
-            return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
+            return new ViewCastInfo( hit.point, hit.distance, globalAngle);
         }
-        else return new ViewCastInfo(false, playerPosition + dir * viewRadius, viewRadius, globalAngle);
+        else return new ViewCastInfo( playerPosition + dir * viewRadius, viewRadius, globalAngle);
+    }
+    
+    public void AddHitInfo(ViewCastInfo hit,ViewCastInfo offsetHit)
+    {
+        if (offsetHit.dst < hit.dst)
+        {
+            hit.point += (Vector2)DirFromAngle(hit.angle,true) * (offsetHit.dst-hit.dst);
+            hit.dst = offsetHit.dst;
+        }
+        viewCastInfos.Add(hit);
+        viewCastInfos.Add(offsetHit);
     }
 
     public struct ViewCastInfo
     {
-        public bool isHit;
         public Vector2 point;
         public float dst;
         public float angle;
 
-        public ViewCastInfo(bool _isHit, Vector2 _point, float _dst, float _angle)
+        public ViewCastInfo(Vector2 _point, float _dst, float _angle)
         {
-            isHit = _isHit;
             point = _point;
             dst = _dst;
             angle = _angle;
         }
     }
-
-    public struct EdgeInfo
-    {
-        public Vector2 pointA;
-        public Vector2 pointB;
-
-        public EdgeInfo(Vector2 a, Vector2 b)
-        {
-            pointA = a;
-            pointB = b;
-        }
-    }
+    
 }
